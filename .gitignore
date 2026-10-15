@@ -1,0 +1,7 @@
+# Never commit real DNS telemetry — contains private browsing/device data
+*.log
+query-log*.csv
+exports/
+pihole-FTL.db
+# OS noise
+.DS_Store
