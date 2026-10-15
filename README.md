@@ -62,8 +62,10 @@ resolver** — phones, laptops, consoles, IoT gadgets, smart TVs — including t
 that have no ad-blocker and no way to install one. Point the router's DHCP at the
 Pi once and the whole network is covered.
 
-*(Add a simple network diagram in `docs/` — device → Pi-hole → upstream resolver,
-with the sinkhole branch to `0.0.0.0`.)*
+![Pi-hole DNS sinkhole query flow](docs/network-diagram.svg)
+
+*Device → Pi-hole → upstream resolver, with the sinkhole branch to `0.0.0.0` for
+blocklisted domains.*
 
 ---
 

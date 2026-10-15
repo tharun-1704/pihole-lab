@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <!-- background panel: keeps the diagram readable in both light and dark GitHub themes -->
+  <rect x="0" y="0" width="820" height="440" rx="12" fill="#ffffff" stroke="#d0d7de" stroke-width="1"/>
+
+  <text x="410" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1f2328">Pi-hole DNS Sinkhole — Query Flow</text>
+
+  <!-- ===== Devices ===== -->
+  <rect x="40" y="110" width="170" height="220" rx="10" fill="#f6f8fa" stroke="#afb8c1" stroke-width="1.5"/>
+  <text x="125" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#57606a">MY DEVICES</text>
+  <text x="125" y="170" text-anchor="middle" font-size="13" fill="#1f2328">Phones</text>
+  <text x="125" y="200" text-anchor="middle" font-size="13" fill="#1f2328">Laptops</text>
+  <text x="125" y="230" text-anchor="middle" font-size="13" fill="#1f2328">Smart TV</text>
+  <text x="125" y="260" text-anchor="middle" font-size="13" fill="#1f2328">IoT gadgets</text>
+  <text x="125" y="300" text-anchor="middle" font-size="11" fill="#8b949e">all use the Pi</text>
+  <text x="125" y="315" text-anchor="middle" font-size="11" fill="#8b949e">as DNS resolver</text>
+
+  <!-- ===== Pi-hole ===== -->
+  <rect x="325" y="150" width="170" height="140" rx="10" fill="#fdecef" stroke="#e03c54" stroke-width="2"/>
+  <text x="410" y="180" text-anchor="middle" font-size="15" font-weight="700" fill="#b11d33">Pi-hole</text>
+  <text x="410" y="200" text-anchor="middle" font-size="11" fill="#57606a">Raspberry Pi 3</text>
+  <text x="410" y="216" text-anchor="middle" font-size="11" fill="#57606a">static IP</text>
+  <text x="410" y="248" text-anchor="middle" font-size="11" fill="#1f2328">checks domain vs.</text>
+  <text x="410" y="263" text-anchor="middle" font-size="11" fill="#1f2328">gravity blocklist</text>
+
+  <!-- ===== Upstream (allowed) ===== -->
+  <rect x="610" y="90" width="170" height="110" rx="10" fill="#eaf5ea" stroke="#2da44e" stroke-width="2"/>
+  <text x="695" y="120" text-anchor="middle" font-size="14" font-weight="700" fill="#1a7f37">Upstream DNS</text>
+  <text x="695" y="142" text-anchor="middle" font-size="11" fill="#57606a">Quad9 / Cloudflare</text>
+  <text x="695" y="166" text-anchor="middle" font-size="11" fill="#1f2328">returns real IP</text>
+  <text x="695" y="182" text-anchor="middle" font-size="11" fill="#1f2328">→ connection proceeds</text>
+
+  <!-- ===== Sinkhole (blocked) ===== -->
+  <rect x="610" y="250" width="170" height="110" rx="10" fill="#f6f8fa" stroke="#6e7781" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="695" y="280" text-anchor="middle" font-size="14" font-weight="700" fill="#57606a">Sinkhole</text>
+  <text x="695" y="302" text-anchor="middle" font-size="13" font-weight="700" fill="#b11d33">0.0.0.0</text>
+  <text x="695" y="326" text-anchor="middle" font-size="11" fill="#1f2328">dead address —</text>
+  <text x="695" y="342" text-anchor="middle" font-size="11" fill="#1f2328">request silently fails</text>
+
+  <!-- arrowhead defs -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#57606a"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2da44e"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#b11d33"/>
+    </marker>
+  </defs>
+
+  <!-- device -> pi-hole -->
+  <line x1="210" y1="220" x2="320" y2="220" stroke="#57606a" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="265" y="210" text-anchor="middle" font-size="11" fill="#57606a">DNS query</text>
+
+  <!-- pi-hole -> upstream (allowed) -->
+  <path d="M495 190 C 555 160, 565 150, 605 145" fill="none" stroke="#2da44e" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="560" y="205" text-anchor="middle" font-size="11" font-weight="600" fill="#1a7f37">allowed → forward</text>
+
+  <!-- pi-hole -> sinkhole (blocked) -->
+  <path d="M495 255 C 555 285, 565 295, 605 300" fill="none" stroke="#b11d33" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <text x="560" y="335" text-anchor="middle" font-size="11" font-weight="600" fill="#b11d33">blocklisted → sinkhole</text>
+
+  <text x="410" y="415" text-anchor="middle" font-size="11" fill="#8b949e">Every lookup passes through the Pi first — one chokepoint covers the whole network.</text>
+</svg>
